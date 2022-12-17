@@ -185,4 +185,13 @@ function delete($id)
     return mysqli_affected_rows($conn);
 }
 
+// count film in database
+function countFilm()
+{
+    global $conn;
+    $result = mysqli_query($conn, "SELECT COUNT(*) AS jumlah FROM film");
+    $row = mysqli_fetch_assoc($result);
+    return $row["jumlah"];
+}
+
 ?>

@@ -22,9 +22,9 @@ function login($data){
             "level" => $row["level"]
         ];
         if($row["level"] == "0"){
-            header("Location: ../admin/index.php");
+            header("Location: ../admin/movie.php");
         }else{
-            header("Location: ../index.php");
+            header("Location: ../movie.php");
         }
     }else{
         echo "
@@ -68,6 +68,6 @@ function register($data){
 function logout(){
     session_start();
     session_destroy();
-    header("Location: ../index.php");
+    header("Location: ../movie.php");
 }
 ?>
