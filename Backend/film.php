@@ -18,6 +18,78 @@ function getAll()
     return $rows;
 }
 
+// get 5 popular movies
+function get5Popular()
+{
+    global $conn;
+
+    $query = "SELECT f.* , IFNULL(count(r.rating),0) AS jumlah_rating
+     FROM film f
+     LEFT JOIN rating r ON f.id = r.id_film
+     GROUP BY f.id
+     ORDER BY jumlah_rating DESC
+     LIMIT 5";
+    $result = mysqli_query($conn, $query);
+    $rows = [];
+    while($row = mysqli_fetch_assoc($result)){
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
+function get10()
+{
+    global $conn;
+
+    $query = "SELECT f.* , IFNULL(AVG(r.rating),0) AS rating
+     FROM film f
+     LEFT JOIN rating r ON f.id = r.id_film
+     GROUP BY f.id
+     LIMIT 10";
+    $result = mysqli_query($conn, $query);
+    $rows = [];
+    while($row = mysqli_fetch_assoc($result)){
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
+function getTop8Movie()
+{
+    global $conn;
+
+    $query = "SELECT f.* , IFNULL(AVG(r.rating),0) AS rating
+     FROM film f
+     LEFT JOIN rating r ON f.id = r.id_film
+     GROUP BY f.id
+     ORDER BY rating DESC LIMIT 8";
+    $result = mysqli_query($conn, $query);
+    $rows = [];
+    while($row = mysqli_fetch_assoc($result)){
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
+// get 5 latest movies
+function get5Lastest()
+{
+    global $conn;
+
+    $query = "SELECT f.* , IFNULL(AVG(r.rating),0) AS rating
+     FROM film f
+     LEFT JOIN rating r ON f.id = r.id_film
+     GROUP BY f.id
+     ORDER BY tanggal_rilis DESC
+     LIMIT 5";
+    $result = mysqli_query($conn, $query);
+    $rows = [];
+    while($row = mysqli_fetch_assoc($result)){
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
 // get film by id
 function getById($id)
 {
@@ -28,6 +100,18 @@ function getById($id)
     LEFT JOIN rating r ON f.id = r.id_film
     WHERE f.id = $id
     GROUP BY f.id";
+    $result = mysqli_query($conn, $query);
+    return mysqli_fetch_assoc($result);
+}
+
+// get count user film by id
+function getCountUserFilm($id)
+{
+    global $conn;
+
+    $query = "SELECT COUNT(*) AS jumlah_user
+    FROM rating
+    WHERE id_film = $id";
     $result = mysqli_query($conn, $query);
     return mysqli_fetch_assoc($result);
 }
