@@ -101,3 +101,60 @@ var swiperThree = new Swiper(".swiper-three", {
   //     clickable: true,
   //   },
 });
+
+// if register button clicked then change modal title to register and change name submit button to register and add one more input for confirm password
+let addConfirmPassword = true;
+
+$("#register").click(function () {
+  $("#exampleModalLabel").text("Register");
+  $("button[name='login']").text("Register");
+  $("button[name='login']").attr("name", "register");
+  if (addConfirmPassword) {
+    $("div[id='registerLink']").remove();
+    $("#authForm").append(`
+            <div class="mb-3" id="confirmPassword">
+              <label for="confirmPassword" class="form-label">Confirm Password</label>
+              <input type="password" class="form-control rounded-0" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+            </div>
+          `);
+  }
+  addConfirmPassword = false;
+});
+
+// if login button clicked then change modal title to login and change name submit button to login and remove confirm password input
+$("#login").click(function () {
+  $("#exampleModalLabel").text("Login");
+  $("button[name='register']").text("Login");
+  $("button[name='register']").attr("name", "login");
+  $("div[id='confirmPassword']").remove();
+  // add register link in bottom of password input
+  if (!addConfirmPassword) {
+    $("#authForm").append(`
+            <div class="mb-3" id="registerLink">
+            Don't have an account? Sign Up First
+            </div>
+          `);
+  }
+  addConfirmPassword = true;
+});
+
+$(document).ready(function () {
+  $("#result").hide();
+});
+
+$(document).ready(function () {
+  $("#keyword").on("keyup", function () {
+    if ($("#keyword").val() == "") {
+      $("#result").hide();
+    } else {
+      $("#result").show();
+    }
+  });
+});
+
+$(document).ready(function () {
+  // event ketika keyword ditulis
+  $("#keyword").on("keyup", function () {
+    $("#result").load("Search/search.php?keyword=" + $("#keyword").val());
+  });
+});

@@ -7,7 +7,7 @@ function login($data){
     global $conn;
 
     $username = $data["username"];
-    $password = $data["password"];
+    $password = md5($data["password"]);
 
     $query = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
     $result = mysqli_query($conn, $query);
@@ -24,13 +24,13 @@ function login($data){
         if($row["level"] == "0"){
             header("Location: ../admin/movie.php");
         }else{
-            header("Location: ../movie.php");
+            header("Location: index.php");
         }
     }else{
         echo "
             <script>
                 alert('username atau password salah');
-                document.location.href='login.php';
+                document.location.href='index.php';
             </script>
         ";
     }
@@ -39,25 +39,52 @@ function login($data){
 function sessionCheckAdmin(){
     session_start();
     if($_SESSION["user"]["level"] != "0"){
-        header("Location: login.php");
+        header("Location: index.php");
         exit;
     }
 }
 
-// function sessionCheckUser(){
-//     session_start();
-//     if($_SESSION["user"]["level"] != "1"){
-//         header("Location: login.php");
-//         exit;
-//     }
-// }
+function sessionCheckUser(){
+    session_start();
+    if($_SESSION["user"]["level"] != "1"){
+        header("Location: index.php");
+        exit;
+    }
+}
 
 function register($data){
     global $conn;
 
     $username = $data["username"];
     $password = $data["password"];
+    $confirmPassword = $data["confirmPassword"];
     $role = 1;
+    
+    // check password sama atau tidak
+    if($password != $confirmPassword){
+        echo "
+            <script>
+                alert('password tidak sama');
+                document.location.href='index.php';
+            </script>
+        ";
+        return false;
+    }
+
+    // check username sudah ada atau belum
+    $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
+    if(mysqli_fetch_assoc($result)){
+        echo "
+            <script>
+                alert('username sudah terdaftar');
+                document.location.href='index.php';
+            </script>
+        ";
+        return false;
+    }
+
+    // enkripsi password
+    $password = md5($password);
 
     $query = "INSERT INTO user VALUES ('','$username','$password','$role')";
     mysqli_query($conn, $query);
@@ -68,6 +95,6 @@ function register($data){
 function logout(){
     session_start();
     session_destroy();
-    header("Location: ../movie.php");
+    header("Location: index.php");
 }
 ?>

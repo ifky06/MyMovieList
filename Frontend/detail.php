@@ -2,16 +2,16 @@
 require '../backend/film.php';
 require '../backend/rateComment.php';
 require '../backend/connection.php';
-
-session_start();
+require 'View/header.php';
 
 $id=$_GET["id"];
+$id_user=isset($_SESSION["user"]["id"]) ? $_SESSION["user"]["id"] : "";
 $film=getById($id);
 $count = getCountUserFilm($id);
 $comment=showComment($id);
 
-if(isset($_POST["submit"])){
-    if(rate($_POST,$id)>0){
+if(isset($_POST["rate"])){
+    if(rate($_POST,$id,$id_user)>0){
         echo "
             <script>
                 alert('rate berhasil');
@@ -29,7 +29,7 @@ if(isset($_POST["submit"])){
 }
 
 if(isset($_POST["komen"])){
-    if(comment($_POST,$id)>0){
+    if(comment($_POST,$id,$id_user)>0){
         echo "
             <script>
                 alert('comment berhasil');
@@ -46,7 +46,7 @@ if(isset($_POST["komen"])){
     }
 }
 
-require 'View/header.php';
+
 ?>
 
 <p class="fw-bold fs-5 text-dark line pb-1"><?= $film["judul"]; ?></p>
@@ -70,8 +70,9 @@ require 'View/header.php';
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Rate This Movie</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body text-center">
-                    <form action="" method="post">
+                <div class="modal-body text-center" id="modalBody">
+                  <form  method="post" action="">
+                    <div id="rateBody">
                         <input type="hidden" name="id" value="<?= $film["id"]; ?>">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="rating" id="inlineRadio1" value="1">
@@ -94,9 +95,10 @@ require 'View/header.php';
                             <label class="form-check-label" for="inlineRadio2">5</label>
                         </div>
                     </div>
+                  </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" name="submit" type="button" class="btn btn-primary rounded-0">Rate</button>
+                    <button type="submit" name="rate" type="button" id="rateButton" class="btn btn-primary rounded-0">Rate</button>
                 </form>
                 </div>
                 </div>
@@ -163,8 +165,8 @@ require 'View/header.php';
 
           <!-- comment form -->
           <p class="fw-bold text-dark line-sm pb-1 mt-4">Comment</p>
-          <form class="d-flex">
-            <div class="input-group input-group-sm me-2 d-flex">
+          <form method="post" action="" id="commentForm">
+            <div class="input-group input-group-sm me-2 d-flex" id="inputComment">
             <input type="hidden" name="id" value="<?= $film["id"]; ?>">
               <input name="comment" class="form-control rounded-0" type="search" placeholder="Comment Here" aria-label="Comment" />
               <button name="komen" class="btn btn-primary fw-bold rounded-0" type="submit">Comment</button>
@@ -182,4 +184,22 @@ require 'View/header.php';
             <?php endforeach; ?>
         </div>
       </div>
+
+      <script>
+        // if user not login, change modal body to text "you must login first to rate" jquery
+        if (!login) {
+          $("div[id='rateBody']").remove();
+          $("#rateButton").remove();
+          $("#inputComment").remove();
+          $("#modalBody").append("<p class='text-center pt-3 fst-italic fw-bold fs-3 text-secondary'>You must login first to rate</p>");
+          $("#commentForm").append(`
+          <div>
+            <p class='text-center pt-1 fst-italic fw-bold fs-5 text-secondary'>You must login first to comment</p>
+          </div>
+          `);
+        }
+
+        
+
+      </script>
 <?php require "View/footer.php"; ?>

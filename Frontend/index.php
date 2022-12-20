@@ -3,19 +3,9 @@ require '../backend/film.php';
 require '../backend/auth.php';
 require '../backend/connection.php';
 $film = get10();
-$top= getTop8Movie();
-$popular = get5Popular();
-$lastest = get5Lastest();
-
-// tombol cari ditekan
-if(isset($_POST["cari"])){
-    $film = search($_POST["keyword"]);
-}
-
-// tombol logout ditekan
-if(isset($_POST["submit"])){
-    logout();
-}
+$top= getTopMovie(8);
+$popular = getPopular(5);
+$lastest = getLastest(5);
 
 require 'View/header.php';
 ?>
@@ -88,7 +78,7 @@ require 'View/header.php';
           </ul>
 
           <ul class="list-group rounded-0 mt-4">
-            <li class="list-group-item bg-secondary text-light fw-bold">New Movie</li>
+            <li class="list-group-item bg-secondary text-light fw-bold">Latest Movie</li>
             <?php $i=1; ?>
             <?php foreach($lastest as $row) : ?>
             <li class="list-group-item">

@@ -19,7 +19,7 @@ function getAll()
 }
 
 // get 5 popular movies
-function get5Popular()
+function getPopular($count)
 {
     global $conn;
 
@@ -28,7 +28,7 @@ function get5Popular()
      LEFT JOIN rating r ON f.id = r.id_film
      GROUP BY f.id
      ORDER BY jumlah_rating DESC
-     LIMIT 5";
+     LIMIT $count";
     $result = mysqli_query($conn, $query);
     $rows = [];
     while($row = mysqli_fetch_assoc($result)){
@@ -54,7 +54,7 @@ function get10()
     return $rows;
 }
 
-function getTop8Movie()
+function getTopMovie($count)
 {
     global $conn;
 
@@ -62,7 +62,7 @@ function getTop8Movie()
      FROM film f
      LEFT JOIN rating r ON f.id = r.id_film
      GROUP BY f.id
-     ORDER BY rating DESC LIMIT 8";
+     ORDER BY rating DESC LIMIT $count";
     $result = mysqli_query($conn, $query);
     $rows = [];
     while($row = mysqli_fetch_assoc($result)){
@@ -71,8 +71,8 @@ function getTop8Movie()
     return $rows;
 }
 
-// get 5 latest movies
-function get5Lastest()
+// get latest movies
+function getLastest($count)
 {
     global $conn;
 
@@ -81,7 +81,7 @@ function get5Lastest()
      LEFT JOIN rating r ON f.id = r.id_film
      GROUP BY f.id
      ORDER BY tanggal_rilis DESC
-     LIMIT 5";
+     LIMIT $count";
     $result = mysqli_query($conn, $query);
     $rows = [];
     while($row = mysqli_fetch_assoc($result)){
@@ -137,6 +137,26 @@ function search($keyword)
         $rows[] = $row;
     }
     return $rows;
+}
+
+// search film user
+function searchUser($keyword)
+{
+    global $conn;
+
+    $query = "SELECT f.* , IFNULL(AVG(r.rating),0) AS rating
+                FROM film f
+                LEFT JOIN rating r ON f.id = r.id_film
+                WHERE
+                judul LIKE '%$keyword%'
+                GROUP BY f.id
+                LIMIT 5";
+    $result = mysqli_query($conn, $query);
+        $rows = [];
+        while($row = mysqli_fetch_assoc($result)){
+            $rows[] = $row;
+        }
+        return $rows;
 }
 
 // add film

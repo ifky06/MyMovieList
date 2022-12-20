@@ -1,11 +1,11 @@
 <?php
 require 'connection.php';
 
-function rate($data , $id){
+function rate($data , $id , $id_user){
     global $conn;
 
     $id_film = $id;
-    $id_user = $_SESSION["user"]["id"];
+    $id_user = $id_user;
     $rating = $data["rating"];
 
     $query = "INSERT INTO rating VALUES ('', '$id_film', '$id_user', '$rating')";
@@ -14,11 +14,12 @@ function rate($data , $id){
     return mysqli_affected_rows($conn);
 }
 
-function comment($data,$id){
+function comment($data,$id, $id_user){
+    session_start();
     global $conn;
 
     $id_film = $id;
-    $id_user = $_SESSION["user"]["id"];
+    $id_user = $id_user;
     $comment = $data["comment"];
 
     $query = "INSERT INTO komentar VALUES ('', '$id_film', '$id_user', '$comment')";
