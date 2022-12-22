@@ -1,6 +1,6 @@
 <?php
 require '../../backend/film.php';
-require '../../backend/connection.php';
+require 'view/header.php';
 
 $id=$_GET["id"];
 $film=getById($id);
@@ -24,7 +24,7 @@ if(isset ($_POST['submit'])){
     }
 }
 
-require 'view/header.php';
+
 require 'view/sidebar.php';
 ?>
 

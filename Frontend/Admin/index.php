@@ -1,6 +1,5 @@
 <?php
 require '../../backend/film.php';
-require '../../backend/connection.php';
 require 'view/header.php';
 require 'view/sidebar.php';
 ?>

@@ -1,5 +1,6 @@
 <?php
 require '../../Backend/auth.php';
+require '../../Backend/connection.php';
 
 sessionCheckAdmin();
 // logout if button logout is clicked

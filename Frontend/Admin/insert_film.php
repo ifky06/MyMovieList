@@ -1,6 +1,7 @@
 <?php
 require '../../backend/film.php';
-require '../../backend/connection.php';
+require 'view/header.php';
+
 // cek apakah button submit sudah ditekan atau belum
 if(isset($_POST["submit"])){
     // cek apakah data berhasil ditambahkan atau tidak
@@ -23,7 +24,7 @@ if(isset($_POST["submit"])){
     }
 }
 
-require 'view/header.php';
+
 require 'view/sidebar.php';
 ?>
 <div class="row g-0 line-h3">

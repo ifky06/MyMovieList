@@ -1,6 +1,7 @@
 <?php
 require '../../backend/film.php';
-require '../../backend/connection.php';
+require 'view/header.php';
+
 $film = getAll();
 
 // tombol cari ditekan
@@ -8,7 +9,7 @@ if(isset($_POST["cari"])){
     $film = search($_POST["keyword"]);
 }
 
-require 'view/header.php';
+
 require 'view/sidebar.php';
 ?>
 <div class="row g-0 line-h3">

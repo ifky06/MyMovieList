@@ -2,23 +2,41 @@
 require 'connection.php';
 
 function login($data){
-    session_start();
+    // session_start();
 
     global $conn;
 
     $username = $data["username"];
-    $password = md5($data["password"]);
+    $password = $data["password"];
+    
 
-    $query = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
+    $query = "SELECT * FROM user WHERE username = '$username'";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
 
-    if($row){
+    if($row < 1){
+        echo "
+        <script>
+            alert('username salah');
+            document.location.href='index.php';
+        </script>
+        ";
+        return false;
+    }
+
+    if(!password_verify($password, $row["password"])){
+        echo "
+        <script>
+            alert('password salah');
+            document.location.href='index.php';
+        </script>
+    ";
+        return false;
+    }
         $_SESSION["user"]=[
             "login" => true,
             "id" => $row["id"],
             "username" => $row["username"],
-            "password" => $row["password"],
             "level" => $row["level"]
         ];
         if($row["level"] == "0"){
@@ -26,14 +44,7 @@ function login($data){
         }else{
             header("Location: index.php");
         }
-    }else{
-        echo "
-            <script>
-                alert('username atau password salah');
-                document.location.href='index.php';
-            </script>
-        ";
-    }
+
 }
 
 function sessionCheckAdmin(){
@@ -84,7 +95,9 @@ function register($data){
     }
 
     // enkripsi password
-    $password = md5($password);
+    // $password = md5($password);
+
+    $password = password_hash($password, PASSWORD_DEFAULT);
 
     $query = "INSERT INTO user VALUES ('','$username','$password','$role')";
     mysqli_query($conn, $query);
