@@ -105,7 +105,7 @@ var swiperThree = new Swiper(".swiper-three", {
 // if register button clicked then change modal title to register and change name submit button to register and add one more input for confirm password
 let addConfirmPassword = true;
 
-$("#register").click(function () {
+const registerClick = () => {
   $("#exampleModalLabel").text("Register");
   $("button[name='login']").text("Register");
   $("button[name='login']").attr("name", "register");
@@ -119,6 +119,10 @@ $("#register").click(function () {
           `);
   }
   addConfirmPassword = false;
+};
+
+$(".register").click(function () {
+  registerClick();
 });
 
 // if login button clicked then change modal title to login and change name submit button to login and remove confirm password input
@@ -130,12 +134,17 @@ $("#login").click(function () {
   // add register link in bottom of password input
   if (!addConfirmPassword) {
     $("#authForm").append(`
-            <div class="mb-3" id="registerLink">
-            Don't have an account? Sign Up First
+            <div class="mb-3 register" id="registerLink">
+                Don't have an account? Sign Up Here
             </div>
           `);
   }
   addConfirmPassword = true;
+
+  // cobas
+  $(".register").click(function () {
+    registerClick();
+  });
 });
 
 $(document).ready(function () {

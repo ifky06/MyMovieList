@@ -1,11 +1,10 @@
 <?php
 require '../backend/film.php';
-require '../backend/auth.php';
 require '../backend/connection.php';
+require 'View/header.php';
 
 $top= getTopMovie(20);
 
-require 'View/header.php';
 ?>
 
 <p class="fw-bold fs-5 text-dark line pb-1">Top Movie List</p>

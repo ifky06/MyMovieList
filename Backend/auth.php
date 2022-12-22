@@ -22,7 +22,7 @@ function login($data){
             "level" => $row["level"]
         ];
         if($row["level"] == "0"){
-            header("Location: ../admin/movie.php");
+            header("Location: Admin/index.php");
         }else{
             header("Location: index.php");
         }
@@ -39,18 +39,18 @@ function login($data){
 function sessionCheckAdmin(){
     session_start();
     if($_SESSION["user"]["level"] != "0"){
-        header("Location: index.php");
+        header("Location: ../index.php");
         exit;
     }
 }
 
-function sessionCheckUser(){
-    session_start();
-    if($_SESSION["user"]["level"] != "1"){
-        header("Location: index.php");
-        exit;
-    }
-}
+// function sessionCheckUser(){
+//     session_start();
+//     if($_SESSION["user"]["level"] != "1"){
+//         header("Location: index.php");
+//         exit;
+//     }
+// }
 
 function register($data){
     global $conn;

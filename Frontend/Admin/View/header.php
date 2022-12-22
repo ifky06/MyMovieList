@@ -1,9 +1,12 @@
 <?php
+require '../../Backend/auth.php';
+
+sessionCheckAdmin();
 // logout if button logout is clicked
 
 
 
-if(isset($_POST["submit"])){
+if(isset($_POST["logout"])){
     logout();
 }
 
@@ -43,7 +46,7 @@ if(isset($_POST["submit"])){
             </div>
             <div class="icon">
                 <form action="" method="post">
-                    <button type="submit" name="submit" class="btn btn-outline-light">
+                    <button type="submit" name="logout" class="btn btn-outline-light">
                         <i class="fa-solid fa-sign-out-alt"></i>
                     </button>
                 </form>

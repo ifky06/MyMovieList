@@ -69,7 +69,7 @@ if(isset($_POST["logout"])){
       <div class="modal-dialog">
         <div class="modal-content rounded-0">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+            <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel">Login</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -83,13 +83,13 @@ if(isset($_POST["logout"])){
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control rounded-0" id="password" name="password" placeholder="Password" required>
               </div>
-              <div class="mb-3" id="registerLink">
-              Don't have an account? Sign Up First
+              <div class="mb-3 register" id="registerLink">
+              Don't have an account? Sign Up Here
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Close</button>
-            <button type="submit" name="login" class="btn btn-primary rounded-0">Submit</button>
+            <button type="submit" name="login" class="btn btn-primary rounded-0">Login</button>
           </div>
           </form>
         </div>
@@ -135,7 +135,7 @@ if(isset($_POST["logout"])){
       }else{
         $("#auth").append(`
           <a href="login.php" id="login" class="btn btn-outline-primary btn-sm fw-bold me-3 rounded-0"data-bs-toggle="modal" data-bs-target="#authModal">Login</a>
-          <a href="register.php" id="register" class="btn btn-primary btn-sm fw-bold rounded-0"data-bs-toggle="modal" data-bs-target="#authModal">Sign Up</a>
+          <a href="register.php" id="" class="btn btn-primary btn-sm fw-bold rounded-0 register" data-bs-toggle="modal" data-bs-target="#authModal">Sign Up</a>
         `);
       }
 

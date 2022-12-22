@@ -29,3 +29,10 @@ function checkTime(i) {
   return i;
 }
 startTime();
+
+function showModalMovie(id) {
+  $(document).ready(function () {
+    // event ketika keyword ditulis
+    $("#modalMovie").load("View/detailmovie.php?id=" + id);
+  });
+}

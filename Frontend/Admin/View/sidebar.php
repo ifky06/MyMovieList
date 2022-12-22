@@ -11,7 +11,7 @@
                 <a class="nav-link text-white py-2 line" href="user.php"><i class="fa-solid fa-user me-2"></i> User</a>
             </li>
             <li>
-                <p class="fw-bold ps-2 text-white my-2">
+                <p class="fw-bold text-white my-2">
                     <span id="day"></span>
                     <span id="txt"></span>
                 </p>

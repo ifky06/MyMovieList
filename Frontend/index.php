@@ -1,13 +1,13 @@
 <?php
 require '../backend/film.php';
-require '../backend/auth.php';
 require '../backend/connection.php';
+require 'View/header.php';
+
 $film = get10();
 $top= getTopMovie(8);
 $popular = getPopular(5);
 $lastest = getLastest(5);
 
-require 'View/header.php';
 ?>
       <div class="row">
         <div class="col-md-8">

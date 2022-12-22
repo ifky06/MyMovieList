@@ -43,4 +43,18 @@ function showComment($id){
 
     return $rows;
 }
+
+// check if user already rate the movie
+function checkRate($id_film, $id_user){
+    global $conn;
+
+    $query = "SELECT * FROM rating WHERE id_film = $id_film AND id_user = $id_user";
+    $result = mysqli_query($conn, $query);
+
+    if(mysqli_num_rows($result)>0){
+        return 1;
+    }else{
+        return 0;
+    }
+}
 ?>

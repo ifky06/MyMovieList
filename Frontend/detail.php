@@ -5,10 +5,11 @@ require '../backend/connection.php';
 require 'View/header.php';
 
 $id=$_GET["id"];
-$id_user=isset($_SESSION["user"]["id"]) ? $_SESSION["user"]["id"] : "";
+$id_user=isset($_SESSION["user"]["id"]) ? $_SESSION["user"]["id"] : "0";
 $film=getById($id);
 $count = getCountUserFilm($id);
 $comment=showComment($id);
+$checkRate=checkRate($id,$id_user);
 
 if(isset($_POST["rate"])){
     if(rate($_POST,$id,$id_user)>0){
@@ -186,6 +187,14 @@ if(isset($_POST["komen"])){
       </div>
 
       <script>
+        // check if user already rate the movie
+        let checkRate = <?= $checkRate; ?>;
+        if(checkRate!=0) {
+          $("div[id='rateBody']").remove();
+          $("#rateButton").remove();
+          $("#modalBody").append("<p class='text-center pt-3 fst-italic fw-bold fs-4 text-secondary'>You have already rated this movie</p>");
+        }
+
         // if user not login, change modal body to text "you must login first to rate" jquery
         if (!login) {
           $("div[id='rateBody']").remove();
