@@ -33,7 +33,7 @@ require 'view/sidebar.php';
                     <i class="fa-solid fa-user"></i>
                 </div>
                 <h5 class="card-title">User Count</h5>
-                <div class="display-4 fw-bold">10000</div>
+                <div class="display-4 fw-bold"><?= countUser() ?></div>
                 <a href="user.php" class="text-decoration-none"
                 ><p class="card-text text-white">
                         Show Detail

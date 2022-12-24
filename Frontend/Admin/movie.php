@@ -4,6 +4,26 @@ require 'view/header.php';
 
 $film = getAll();
 
+if(isset($_POST["hapus"])){
+    if(delete($_POST["id"]) > 0){
+        echo "
+            <script>
+                alert('data berhasil dihapus');
+                document.location.href='movie.php';
+            </script>
+        ";
+    }else{
+        echo "
+            <script>
+                alert('data gagal dihapus');
+                document.location.href='movie.php';
+            </script>
+        ";
+        echo "<br>";
+        echo mysqli_error($conn);
+    }
+}
+
 // tombol cari ditekan
 if(isset($_POST["cari"])){
     $film = search($_POST["keyword"]);

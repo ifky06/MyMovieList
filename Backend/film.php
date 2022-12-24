@@ -298,4 +298,14 @@ function countFilm()
     return $row["jumlah"];
 }
 
+// count user
+function countUser()
+{
+    global $conn;
+
+    $query = "SELECT COUNT(*) AS total FROM user";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    return $row["total"];
+}
 ?>

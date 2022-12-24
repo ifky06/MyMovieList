@@ -2,7 +2,6 @@
 require 'connection.php';
 
 function login($data){
-    // session_start();
 
     global $conn;
 
@@ -55,14 +54,6 @@ function sessionCheckAdmin(){
     }
 }
 
-// function sessionCheckUser(){
-//     session_start();
-//     if($_SESSION["user"]["level"] != "1"){
-//         header("Location: index.php");
-//         exit;
-//     }
-// }
-
 function register($data){
     global $conn;
 
@@ -95,8 +86,6 @@ function register($data){
     }
 
     // enkripsi password
-    // $password = md5($password);
-
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     $query = "INSERT INTO user VALUES ('','$username','$password','$role')";

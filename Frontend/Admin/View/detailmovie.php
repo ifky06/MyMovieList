@@ -60,6 +60,9 @@ $row = getById($id);
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-danger" href="hapus.php?id=<?= $row["id"] ?> ">Delete</a>
+                        <form action="" method="post">
+                            <input type="hidden" name="id" value="<?= $row["id"]; ?>">
+                            <button type="submit" name="hapus" class="btn btn-danger">Delete</button>
+                        </form>
                             <a class="btn btn-warning" href="edit.php?id=<?= $row["id"] ?> ">Edit</a>
                         </div>
