@@ -15,6 +15,9 @@
 .line-h3 {
   border-bottom: 1px solid #212529;
 }
+.line-sm {
+  border-bottom: 1px solid #c6c8ca;
+}
 .nav-link:hover {
   color: #fff;
   background-color: #007bff;

@@ -60,6 +60,7 @@ $row = getById($id);
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <a class="btn btn-primary" href="comment.php?id=<?= $row["id"] ?> ">comment</a>
                         <form action="" method="post">
                             <input type="hidden" name="id" value="<?= $row["id"]; ?>">
                             <button type="submit" name="hapus" class="btn btn-danger">Delete</button>

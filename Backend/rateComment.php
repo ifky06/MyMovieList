@@ -31,7 +31,7 @@ function comment($data,$id, $id_user){
 function showComment($id){
     global $conn;
 
-    $query = "SELECT k.komentar, u.username  FROM komentar k
+    $query = "SELECT k.id, k.komentar, u.username  FROM komentar k
     JOIN user u ON k.id_user = u.id
      WHERE id_film = $id";
     $result = mysqli_query($conn, $query);
@@ -42,6 +42,15 @@ function showComment($id){
     }
 
     return $rows;
+}
+
+// delete comment
+function deleteComment($id)
+{
+    global $conn;
+
+    mysqli_query($conn, "DELETE FROM komentar WHERE id = $id");
+    return mysqli_affected_rows($conn);
 }
 
 // check if user already rate the movie
