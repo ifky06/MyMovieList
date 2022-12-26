@@ -126,12 +126,10 @@ if(isset($_POST["logout"])){
         <div class="dropdown pt-3">
           <p class="fw-bold" data-bs-toggle="dropdown" aria-expanded="false">Hello, ${username}</p>
           <div class="dropdown-menu rounded-0">
+            <a href="ratedmovielist.php" class="text-center fw-bold rounded-0 dropdown-item">Rated Movie List</a>
             <form action="" method="post">
               <button type="submit" name="logout" class="text-center fw-bold rounded-0 dropdown-item text-danger">Logout</button>
             </form>
-          </div>
-          <div class="dropdown-menu rounded-0">
-            <a href="ratedmovielist.php" class="text-center fw-bold rounded-0 dropdown-item">Profile</a>
           </div>
         </div>
         `);

@@ -116,6 +116,26 @@ function getCountUserFilm($id)
     return mysqli_fetch_assoc($result);
 }
 
+// get rated film by user
+function getRatedFilm()
+{
+    global $conn;
+
+    $id_user = $_SESSION['user']['id'];
+
+    $query = "SELECT f.* , IFNULL(AVG(r.rating),0) AS rating
+    FROM film f
+    LEFT JOIN rating r ON f.id = r.id_film
+    WHERE r.id_user = $id_user
+    GROUP BY f.id";
+    $result = mysqli_query($conn, $query);
+    $rows = [];
+    while($row = mysqli_fetch_assoc($result)){
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
 // search film
 function search($keyword)
 {
