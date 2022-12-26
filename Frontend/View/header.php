@@ -130,6 +130,9 @@ if(isset($_POST["logout"])){
               <button type="submit" name="logout" class="text-center fw-bold rounded-0 dropdown-item text-danger">Logout</button>
             </form>
           </div>
+          <div class="dropdown-menu rounded-0">
+            <a href="ratedmovielist.php" class="text-center fw-bold rounded-0 dropdown-item">Profile</a>
+          </div>
         </div>
         `);
       }else{

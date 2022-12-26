@@ -48,6 +48,16 @@ $row = getById($id);
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">
+                                            <p class="fw-bold">Rating Usia</p>
+                                            <p><?= $row["rating_usia"]; ?></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="fw-bold">Durasi</p>
+                                            <p><?= $row["durasi"]; ?> Menit</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
                                             <p class="fw-bold">Sinopsis</p>
                                             <p><?= $row["sinopsis"]; ?></p>
                                         </div>
@@ -60,7 +70,7 @@ $row = getById($id);
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-primary" href="comment.php?id=<?= $row["id"] ?> ">comment</a>
+                            <a class="btn btn-primary" href="comment.php?id=<?= $row["id"] ?> ">Comment</a>
                         <form action="" method="post">
                             <input type="hidden" name="id" value="<?= $row["id"]; ?>">
                             <button type="submit" name="hapus" class="btn btn-danger">Delete</button>

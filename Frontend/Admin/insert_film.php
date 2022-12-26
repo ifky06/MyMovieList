@@ -69,6 +69,14 @@ require 'view/sidebar.php';
                 <label for="genre" class="form-label">Genre</label>
                 <textarea name="genre" id="genre" class="form-control"></textarea>
             </div>
+            <div class="mb-3">
+                <label for="rating" class="form-label">Rating Usia</label>
+                <input type="text" class="form-control" id="rating" name="ratingUsia" required>
+            </div>
+            <div class="mb-3">
+                <label for="durasi" class="form-label">Durasi (Menit)</label>
+                <input type="text" class="form-control" id="durasi" name="durasi" required>
+            </div>
             <!-- trailer -->
             <div class="mb-3">
                 <label for="trailer" class="form-label">Trailer</label>

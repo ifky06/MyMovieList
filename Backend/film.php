@@ -171,6 +171,8 @@ function add($data)
     $karakter = htmlspecialchars($data["karakter"]);
     $pemeran = htmlspecialchars($data["pemeran"]);
     $genre = htmlspecialchars($data["genre"]);
+    $ratingUsia = htmlspecialchars($data["ratingUsia"]);
+    $durasi = htmlspecialchars($data["durasi"]);
     $trailer = htmlspecialchars($data["trailer"]);
     $gambar = upload();
     if(!$gambar){
@@ -178,7 +180,7 @@ function add($data)
     }
 
     $query = "INSERT INTO film VALUES
-                ('', '$judul', '$sinopsis', '$tanggal_rilis', '$sutradara', '$karakter', '$pemeran', '$genre', '$trailer', '$gambar')";
+                ('', '$judul', '$sinopsis', '$tanggal_rilis', '$sutradara', '$karakter', '$pemeran', '$genre', '$ratingUsia', '$durasi' ,'$trailer', '$gambar')";
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }
@@ -252,6 +254,8 @@ function update($data)
     $karakter = htmlspecialchars($data["karakter"]);
     $pemeran = htmlspecialchars($data["pemeran"]);
     $genre = htmlspecialchars($data["genre"]);
+    $ratingUsia = htmlspecialchars($data["ratingUsia"]);
+    $durasi = htmlspecialchars($data["durasi"]);
     $trailer = htmlspecialchars($data["trailer"]);
     $gambarLama = htmlspecialchars($data["gambarLama"]);
 
@@ -271,6 +275,8 @@ function update($data)
                 karakter = '$karakter',
                 pemeran = '$pemeran',
                 genre = '$genre',
+                rating_usia = '$ratingUsia',
+                durasi = '$durasi',
                 trailer = '$trailer',
                 cover = '$gambar'
             WHERE id = $id";

@@ -163,6 +163,22 @@ if(isset($_POST["komen"])){
               <p class="text-dark"><?= $film["pemeran"]; ?></li></p>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-3">
+              <p class="text-end text-dark line-sm pb-1">Age Rated :</p>
+            </div>
+            <div class="col-md-9">
+              <p class="text-dark"><?= $film["rating_usia"]; ?></li></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <p class="text-end text-dark line-sm pb-1">Duration :</p>
+            </div>
+            <div class="col-md-9">
+              <p class="text-dark"><?= $film["durasi"]; ?> Menit</li></p>
+            </div>
+          </div>
 
           <!-- comment form -->
           <p class="fw-bold text-dark line-sm pb-1 mt-4">Comment</p>
@@ -177,7 +193,7 @@ if(isset($_POST["komen"])){
           <!-- comment -->
           <?php foreach($comment as $c): ?>
             <div class="mt-4">
-                <p class="text-dark fw-bold mb-0"><?= $c["username"]; ?></p>
+                <p class="text-dark fw-bold mb-0"><?= $c["username"]; ?> <span class="text-secondary"><?= $c["tanggal_komentar"]; ?></span></p>
                 <p class="text-dark line-sm pb-2">
                     <?= $c["komentar"]; ?>
                 </p>

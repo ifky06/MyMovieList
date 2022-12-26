@@ -106,8 +106,8 @@ var swiperThree = new Swiper(".swiper-three", {
 let addConfirmPassword = true;
 
 const registerClick = () => {
-  $("#exampleModalLabel").text("Register");
-  $("button[name='login']").text("Register");
+  $("#exampleModalLabel").text("Sign Up");
+  $("button[name='login']").text("Sign Up");
   $("button[name='login']").attr("name", "register");
   if (addConfirmPassword) {
     $("div[id='registerLink']").remove();

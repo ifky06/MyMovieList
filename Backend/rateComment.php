@@ -15,14 +15,14 @@ function rate($data , $id , $id_user){
 }
 
 function comment($data,$id, $id_user){
-    session_start();
     global $conn;
 
     $id_film = $id;
     $id_user = $id_user;
     $comment = $data["comment"];
+    $date = date("Y-m-d");
 
-    $query = "INSERT INTO komentar VALUES ('', '$id_film', '$id_user', '$comment')";
+    $query = "INSERT INTO komentar VALUES ('', '$id_film', '$id_user', '$comment', '$date')";
     mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);
@@ -31,7 +31,7 @@ function comment($data,$id, $id_user){
 function showComment($id){
     global $conn;
 
-    $query = "SELECT k.id, k.komentar, u.username  FROM komentar k
+    $query = "SELECT k.id, k.komentar, u.username, k.tanggal_komentar FROM komentar k
     JOIN user u ON k.id_user = u.id
      WHERE id_film = $id";
     $result = mysqli_query($conn, $query);
