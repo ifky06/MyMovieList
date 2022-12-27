@@ -184,16 +184,16 @@ function add($data)
 {
     global $conn;
 
-    $judul = htmlspecialchars($data["judul"]);
-    $sinopsis = htmlspecialchars($data["sinopsis"]);
-    $tanggal_rilis = htmlspecialchars($data["rilis"]);
-    $sutradara = htmlspecialchars($data["sutradara"]);
-    $karakter = htmlspecialchars($data["karakter"]);
-    $pemeran = htmlspecialchars($data["pemeran"]);
-    $genre = htmlspecialchars($data["genre"]);
-    $ratingUsia = htmlspecialchars($data["ratingUsia"]);
-    $durasi = htmlspecialchars($data["durasi"]);
-    $trailer = htmlspecialchars($data["trailer"]);
+    $judul = $data["judul"];
+    $sinopsis = $data["sinopsis"];
+    $tanggal_rilis = $data["rilis"];
+    $sutradara = $data["sutradara"];
+    $karakter = $data["karakter"];
+    $pemeran = $data["pemeran"];
+    $genre = $data["genre"];
+    $ratingUsia = $data["ratingUsia"];
+    $durasi = $data["durasi"];
+    $trailer = $data["trailer"];
     $gambar = upload();
     if(!$gambar){
         return false;
